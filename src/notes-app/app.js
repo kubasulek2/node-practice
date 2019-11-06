@@ -1,13 +1,18 @@
 /* Npm packages */
-const fs = require('fs');
 //const validator = require('validator');
 const chalk = require('chalk');
 const yargs = require('yargs');
+const fs = require('fs');
 
 const notes = require('./notes');
 
-/* Customize version */
-yargs.version('1.1.0');
+
+/* Create notes directory if not exists*/
+const dir = './data';
+if (!fs.existsSync(dir)) {
+	fs.mkdirSync(dir);
+}
+
 
 /* Specify command line commands */
 yargs.command({
