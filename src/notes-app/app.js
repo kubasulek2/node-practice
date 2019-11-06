@@ -39,16 +39,22 @@ yargs.command({
 yargs.command({
 	command: 'remove',
 	describe: 'Remove a note: remove fileName',
-	handler: function () {
-		console.log(chalk.red('Removed!'));
-	}
+	builder: {
+		title: {
+			describe: 'Note To Remove',
+			demandOption: true,
+			type: 'string'
+
+		}
+	},
+	handler: argv => notes.removeNote(argv.title)
 });
 
 yargs.command({
 	command: 'list',
 	describe: 'Display a list of all notes',
-	handler: function () {
-		console.log(chalk.green('List!'));
+	handler() {
+		notes.listNotes();
 	}
 });
 
