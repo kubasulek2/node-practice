@@ -2,23 +2,21 @@ const fs = require('fs');
 const chalk = require('chalk');
 
 const addNote = (title, body) => {
-
 	// Format title
 	title = title.trim().replace(/ /g, '_');
-
+	
 	const notes = loadNotes();
-
 	const duplicateNote = notes.find(note => note.title === title);
-	if (duplicateNote) {
+	
+	debugger;
+
+	if (!duplicateNote) {
 		notes.push({
 			title: title,
 			body: body
 		});
-
 		saveNotes(notes);
-		console.log(chalk`
-		 {blue.inverse Success:} note {green ${ title }} added.
-		`);
+		console.log(chalk`{blue.inverse Success:} note {green ${ title }} added.`);
 
 	} else {
 		console.log(`${ chalk.red('Error:') } note ${ title } exist.`);
@@ -26,7 +24,6 @@ const addNote = (title, body) => {
 };
 
 const removeNote = title => {
-
 	title = title.trim().replace(/ /g, '_');
 	const notes = loadNotes();
 	const notesToKeep = notes.filter(note => note.title !== title);
