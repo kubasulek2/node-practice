@@ -1,18 +1,15 @@
 const express = require('express');
+const path = require('path');
 
 const app = express();
+//
+const publicDirectoryPath = path.join(__dirname, '../public');
+app.use(express.static(publicDirectoryPath));
+
 
 // handle get requests for base address
-app.get('', (req, res) => {
-	res.send('<h1>Hello<h1>');
-});
-app.get('/help', (req, res) => {
-	res.send([1,2]);
-});
 
-app.get('/about', (req, res) => {
-	res.send('About me');
-});
+
 
 app.get('/weather', (req, res) => {
 	res.send('here is the weather');
