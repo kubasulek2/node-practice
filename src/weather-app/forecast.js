@@ -7,18 +7,18 @@ const forecast = (position, callback) => {
 	request({ url: weatherUrl, json: true }, (error, response) => {
 		const { 
 			currently, 
-			daily: { data: dailyData }, 
+			daily, 
 			error: respError, 
 			code: errCode 
 		} = response.body;
 		if (error) {
 			callback('Unable to connect to weather services .');
 		} else if (respError) {
-			callback(`Error ${ respError }: ${ errCode }`);
+			callback(`Error ${ errCode }: ${ respError }`);
 		} else {
 			callback(null, {
 				current: currently,
-				summary: dailyData[ 0 ].summary,
+				summary: daily.data[ 0 ].summary,
 				name: name
 			});
 		}
