@@ -22,20 +22,39 @@ app.use(express.static(publicDirectoryPath));
 app.get('', (req, res) => {
 	res.render('index', {
 		title: 'Weather App',
-		name: 'Kuba'
+		name: 'KubaSulek'
 	});
 });
 
 app.get('/about', (req, res) => {
 	res.render('about', {
-		title: 'About'
+		title: 'About',
+		name: 'KubaSulek'
 	});
 });
 
 app.get('/help', (req, res) => {
 	res.render('help', {
 		title: 'Help',
-		help: 'helpful text'
+		help: 'helpful text',
+		name: 'KubaSulek'
+	});
+});
+
+app.get('/help/*', (req, res) => {
+	res.render('404', {
+		title: '404',
+		errorMsg: 'Help Article not Found',
+		name: 'KubaSulek',
+	});
+});
+
+// match anything hasn't been matched before
+app.get('*', (req, res) => {
+	res.render('404', {
+		title: '404',
+		errorMsg: 'Page not found',
+		name: 'KubaSulek'
 	});
 });
 
