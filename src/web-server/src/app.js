@@ -2,6 +2,10 @@ const express = require('express');
 const path = require('path');
 const hbs = require('hbs');
 
+const forecast = require('./utils/forecast');
+const geocode = require('./utils/geocode');
+
+
 const app = express();
 
 // Define paths for Express config.
@@ -41,6 +45,33 @@ app.get('/help', (req, res) => {
 	});
 });
 
+app.get('/weather', (req, res) => {
+	const address = req.query.address;
+
+	if (!address) {
+		res.send({ error: 'Please provide location/address as an argument' });
+	} else {
+		geocode(address, (error, {location, lat,lon}) => {
+			if (error) {
+				return res.send({ error: error });
+			}
+			forecast(lat,lon, (error, forecastData) => {
+				if (error) {
+					return res.send({ error: error });
+				}
+				res.send({
+					name: address,
+					forecast: forecastData,
+					location: location
+				});
+			});
+		});
+	}
+});
+
+
+/* Route errors handling */
+
 app.get('/help/*', (req, res) => {
 	res.render('404', {
 		title: '404',
@@ -57,6 +88,7 @@ app.get('*', (req, res) => {
 		name: 'KubaSulek'
 	});
 });
+
 
 
 
