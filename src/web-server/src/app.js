@@ -51,11 +51,11 @@ app.get('/weather', (req, res) => {
 	if (!address) {
 		res.send({ error: 'Please provide location/address as an argument' });
 	} else {
-		geocode(address, (error, {location, lat,lon}) => {
+		geocode(address, (error, { location, lat, lon } = {}) => {
 			if (error) {
 				return res.send({ error: error });
 			}
-			forecast(lat,lon, (error, forecastData) => {
+			forecast(lat, lon, (error, forecastData) => {
 				if (error) {
 					return res.send({ error: error });
 				}
