@@ -2,15 +2,18 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
-//
 const publicDirectoryPath = path.join(__dirname, '../public');
+
+
+// set up handlebars templates - need npm i hbs first.
+app.set('view engine', 'hbs');
+// express.static is responsible for handling paths, so that paths in views/.hbs files stays the same as in public/.html files
 app.use(express.static(publicDirectoryPath));
 
 
-// handle get requests for base address
-
-
-
+app.get('', (req, res) => {
+	res.render('index');
+})
 app.get('/weather', (req, res) => {
 	res.send('here is the weather');
 });
