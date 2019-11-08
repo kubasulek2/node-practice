@@ -1,22 +1,21 @@
 const express = require('express');
 const path = require('path');
+const hbs = require('hbs');
 
 const app = express();
 
 // Define paths for Express config.
 const publicDirectoryPath = path.join(__dirname, '../public');
-const viewsPath = path.join(__dirname, '../templates');
+const viewsPath = path.join(__dirname, '../templates/views');
+const partialsPath = path.join(__dirname, '../templates/partials');
 
-// set up handlebars templates - need npm i hbs first. If only this is present
-// templates directory name must be "views" an be in the root dir!
+// Set up handlebars engine;
 app.set('view engine', 'hbs');
-
-// to override this another set - this time views:
 app.set('views', viewsPath);
+hbs.registerPartials(partialsPath);
 
 
-
-// express.static is responsible for handling paths, so that paths in views/.hbs files stays the same as in public/.html files
+// Set up static directory to serve. 123
 app.use(express.static(publicDirectoryPath));
 
 
