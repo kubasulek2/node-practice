@@ -1,10 +1,11 @@
 {
-  "name": "web-server",
+  "name": "weather",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+	"start": "node src/app.js",
+	"dev": "nodemon src/app.js -e js,hbs,css"
   },
   "author": "kubasulek2 <kubasulek2@gmail.com>",
   "license": "MIT",
